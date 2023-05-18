@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <title>Watchlist</title>
+</head>
+
+<body class="bg-grey">
+    <nav class="navbar bg-dark bg-body-tertiart">
+        <div class="container">
+            <div class="input-group">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">Anime</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Anime</a></li>
+                    <li><a class="dropdown-item disabled" href="#">Manga (WIP)</a></li>
+                </ul>
+                <input type="text" id="searchArea" class="form-control form-control-lg" placeholder="Anime ismi">
+            </div>
+        </div>
+    </nav>
+
+    <div class="modal fade" id="productDetails" style="z-index: 1065;">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Title <span class="badge text-bg-info">Anime</span></h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="DetailsForm">
+                        <div class="row">
+                            <div class="col-md-4 mx-auto">
+                                <img src="testImg-realesrgan-x4plus.png" class="img-fluid">
+                            </div>
+                            <div class="col-md-9 mx-auto">
+                                <form>
+                                    <div class="form-group my-2">
+                                        <label for="animeName">Anime Adı:</label>
+                                        <input type="text" class="form-control" id="animeName" value="Title" readonly>
+                                    </div>
+                                    <div class="form-group my-2">
+                                        <label for="animeEpisode">İzlenen Bölüm Sayısı:</label>
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <input type="number" class="form-control" id="watchedAnimeEpisodes"
+                                                placeholder="0">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text" id="maxAnimeEpisodeNumber">12</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group my-2">
+                                        <label for="animeStars">Anime Puanım:</label>
+                                        <select class="form-select" id="animeStars">
+                                            <option value="10" selected>10</option>
+                                            <option value="9">9</option>
+                                            <option value="8">8</option>
+                                            <option value="7">7</option>
+                                            <option value="6">6</option>
+                                            <option value="5">5</option>
+                                            <option value="4">4</option>
+                                            <option value="3">3</option>
+                                            <option value="2">2</option>
+                                            <option value="1">1</option>
+                                            <option value="0">0</option>
+                                        </select>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                    <button type="button" save="" class="btn btn-primary">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="searchResultsModal" style="z-index: 1060;">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Arama Sonuçları</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-12" id="searchResults"></div>
+                    </div>
+                </div>
+                <div class="modal-footer text-center">
+                    <p class="text-center">En alakalı 5 sonuç gösteriliyor.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-2">
+        <nav>
+            <div class="nav nav-tabs justify-content-center my-2" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-anime-tab" data-bs-toggle="tab" data-bs-target="#nav-animelist"
+                    type="button" role="tab" aria-controls="nav-animelist" aria-selected="true">Anime</button>
+                <button class="nav-link disabled" id="nav-manga-tab" data-bs-toggle="tab"
+                    data-bs-target="#nav-mangalist" type="button" role="tab" aria-controls="nav-mangalist"
+                    aria-selected="false">Manga</button>
+                <button class="nav-link" id="nav-settings-tab" data-bs-toggle="tab" data-bs-target="#nav-settings"
+                    type="button" role="tab" aria-controls="nav-settings" aria-selected="false">Ayarlar</button>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-animelist" role="tabpanel" aria-labelledby="nav-anime-tab">
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped align-middle">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Sıra</th>
+                                <th>Anime Adı</th>
+                                <th class="text-center">İzlenen Bölüm Sayısı</th>
+                                <th class="text-center">Puan</th>
+                                <th class="text-center">#</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbodyAnimes">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
+                AYARLAR (WIP)
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+    integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
+    crossorigin="anonymous"></script>
+<script src="index.js"></script>
+
+</html>
