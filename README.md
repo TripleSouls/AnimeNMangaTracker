@@ -1,2 +1,2 @@
-# WatchlistForAnimeNManga
-Watchlist for Anime And Mangas. Build with ElectronJS
+# TrackerForAnimeNManga
+Build with ElectronJS
