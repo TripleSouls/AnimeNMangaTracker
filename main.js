@@ -58,7 +58,7 @@ app.whenReady().then(() => {
     })
 
     ipcMain.on("searchedName", (e, arg) => {
-        let jsonUrl = "https://api.jikan.moe/v4/anime?limit=5&q=" + arg + "&sfw";
+        let jsonUrl = "APIURLHERE.COM/?q=" + arg + "&sfw";
 
         https.get(jsonUrl, (res) => {
             let data = '';
